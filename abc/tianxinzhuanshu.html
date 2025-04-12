@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>嘉玲宝宝，可以跟我和好吗？</title>
+  <style>
+    body {
+      background-color: #ffe6eb;
+      font-family: "微软雅黑", sans-serif;
+      text-align: center;
+      padding: 40px;
+      margin: 0;
+    }
+
+    #image {
+      width: 220px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      font-size: 22px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-yes {
+      background-color: #d83a6f;
+    }
+
+    .btn-no {
+      background-color: #407bbd;
+    }
+
+    #playBtn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border: 2px solid #888;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    #finalText {
+      display: none;
+      margin-top: 20px;
+      font-size: 20px;
+      color: #c72c61;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 主图 -->
+  <img id="image" src="angry.png" alt="状态图" />
+
+  <!-- 标题 -->
+  <h1 id="title">嘉玲宝宝，可以跟我和好吗？</h1>
+
+  <!-- 按钮 -->
+  <button id="yesBtn" class="btn btn-yes" onclick="handleYes()">和好</button>
+  <button id="noBtn" class="btn btn-no" onclick="handleNo()">不要</button>
+
+  <!-- 播放按钮 -->
+  <div id="playBtn" onclick="playAudio()">▶</div>
+  <audio id="audio" src="voice.mp3"></audio>
+
+  <!-- 告白 -->
+  <div id="finalText">
+    太好了～终于和好了！抱抱抱！❤️<br>
+    ——你的宝宝 Jeremy
+  </div>
+
+  <script>
+    const images = ["angry.png", "sad1.png", "cry1.png", "cry2.png"];
+    const image = document.getElementById("image");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const title = document.getElementById("title");
+    const finalText = document.getElementById("finalText");
+    let noClicks = 0;
+
+    function handleNo() {
+      noClicks++;
+      if (noClicks < images.length) {
+        image.src = images[noClicks];
+        title.textContent = ["真的不要吗…", "我真的错了…", "你不原谅我我就哭了…"][noClicks - 1];
+        yesBtn.style.fontSize = 22 + noClicks * 5 + "px";
+        noBtn.style.fontSize = 22 - noClicks * 2 + "px";
+      } else {
+        noBtn.textContent = "😭😭😭";
+      }
+    }
+
+    function handleYes() {
+      image.src = "hug.png";
+      title.style.display = "none";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+      finalText.style.display = "block";
+    }
+
+    function playAudio() {
+      document.getElementById("audio").play();
+    }
+  </script>
+
+</body>
+</html>
